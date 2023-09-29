@@ -1,6 +1,12 @@
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import MovieDetails from 'components/MovieDetails';
 import { Suspense, useRef } from 'react';
+import {
+  SectionContainer,
+  Title,
+  StyledLink,
+  LinkBack,
+} from './MovieDetailsPage.styled';
 
 const MovieDetailsPage = () => {
   const location = useLocation();
@@ -8,24 +14,24 @@ const MovieDetailsPage = () => {
 
   return (
     <main>
-      <section>
-        <NavLink to={locationBackRef.current}>Go back</NavLink>
+      <SectionContainer>
+        <LinkBack to={locationBackRef.current}>Go back</LinkBack>
         <MovieDetails />
-      </section>
-      <section>
-        <h2>Additional information</h2>
+      </SectionContainer>
+      <SectionContainer>
+        <Title>Additional information</Title>
         <ul>
           <li>
-            <NavLink to="cast">Cast</NavLink>
+            <StyledLink to="cast">Cast</StyledLink>
           </li>
           <li>
-            <NavLink to="reviews">Reviews</NavLink>
+            <StyledLink to="reviews">Reviews</StyledLink>
           </li>
         </ul>
         <Suspense fallback={<div>Loading...</div>}>
           <Outlet />
         </Suspense>
-      </section>
+      </SectionContainer>
     </main>
   );
 };

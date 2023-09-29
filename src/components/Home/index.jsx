@@ -1,6 +1,7 @@
 import MoviesList from 'components/MoviesList';
 import { useEffect, useState } from 'react';
 import { fetchPopularMovies } from 'api/movies';
+import { Title, Section } from './Home.styled';
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState(null);
@@ -21,14 +22,14 @@ const Home = () => {
   }, []);
 
   return (
-    <section>
-      <h1>Trending today</h1>
+    <Section>
+      <Title>Trending today</Title>
       {error && <p>Sorry, something went wrong, try again.</p>}
       {popularMovies && <MoviesList movies={popularMovies} />}
       {popularMovies && popularMovies.length === 0 && (
         <p>We are sorry. There are no matches to your request.</p>
       )}
-    </section>
+    </Section>
   );
 };
 

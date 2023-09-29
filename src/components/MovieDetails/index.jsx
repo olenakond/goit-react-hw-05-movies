@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 import { fetchMoviesById } from 'api/movies';
 import { useParams } from 'react-router-dom';
+import {
+  FlexContainer,
+  Title,
+  Score,
+  SubTitle,
+  GenresList,
+} from './MovieDetails.styled';
+import defaultImg from 'img/not_found.jpg';
 
 const MovieDetails = () => {
   const [movieInfo, setMovieInfo] = useState(null);
@@ -23,36 +31,40 @@ const MovieDetails = () => {
   }, [movieId]);
 
   return (
-    <div>
+    <section>
       {error && <p>Sorry, something went wrong, try again.</p>}
       {movieInfo && (
-        <div>
+        <FlexContainer>
           <div>
             <img
-              src={`https://image.tmdb.org/t/p/w500/${movieInfo.poster_path}`}
+              src={
+                movieInfo.poster_path
+                  ? `https://image.tmdb.org/t/p/w500/${movieInfo.poster_path}`
+                  : defaultImg
+              }
               alt={movieInfo.title}
               width="200"
             />
           </div>
           <div>
-            <h1>{`${movieInfo.title} (${movieInfo.release_date.slice(
+            <Title>{`${movieInfo.title} (${movieInfo.release_date.slice(
               0,
               4
-            )})`}</h1>
-            <p>User score: {`${Math.round(movieInfo.popularity)} %`}</p>
-            <h2>Overview</h2>
+            )})`}</Title>
+            <Score>User score: {`${Math.round(movieInfo.popularity)} %`}</Score>
+            <SubTitle>Overview</SubTitle>
             <p>{movieInfo.overview}</p>
-            <h2>Genres</h2>
-            <ul>
+            <SubTitle>Genres</SubTitle>
+            <GenresList>
               {movieInfo.genres.map(({ id, name }) => (
                 <li key={id}>{name}</li>
               ))}
-            </ul>
+            </GenresList>
             <p></p>
           </div>
-        </div>
+        </FlexContainer>
       )}
-    </div>
+    </section>
   );
 };
 

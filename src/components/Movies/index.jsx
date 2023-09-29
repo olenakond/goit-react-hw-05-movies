@@ -2,6 +2,7 @@ import { fetchMoviesBySearch } from 'api/movies';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import MoviesList from 'components/MoviesList';
+import { Container, Form } from './Movies.steled';
 
 const Movies = () => {
   const [movies, setMovies] = useState(null);
@@ -37,20 +38,20 @@ const Movies = () => {
   }, [query]);
 
   return (
-    <section>
+    <Container>
       {error && <p>Sorry, something went wrong, try again.</p>}
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <label>
           <input type="text" name="search" />
         </label>
         <button type="submit">Search</button>
-      </form>
+      </Form>
 
       {movies && <MoviesList movies={movies} />}
       {movies && movies.length === 0 && (
         <p>We are sorry. There are no matches to your request.</p>
       )}
-    </section>
+    </Container>
   );
 };
 
