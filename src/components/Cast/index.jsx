@@ -1,6 +1,7 @@
 import { fetchCastById } from 'api/movies';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import defaultImg from 'img/not_found.jpg';
 
 const Cast = () => {
   const [castInfo, setCastInfo] = useState(null);
@@ -25,21 +26,25 @@ const Cast = () => {
   return (
     <div>
       {error && <p>Sorry, something went wrong, try again.</p>}
-      {castInfo && (
-        <div>
-          {castInfo.map(({ id, name, character, profile_path }) => (
-            <li key={id}>
-              <img
-                src={`https://image.tmdb.org/t/p/w500${profile_path}`}
-                alt={name}
-                width="75"
-              />
-              <h3>{name}</h3>
-              <p>{`Character: ${character}`}</p>
-            </li>
-          ))}
-        </div>
-      )}
+      {castInfo &&
+        (castInfo.length > 0 ? (
+          <div>
+            {castInfo.map(({ id, name, character, profile_path }) => {
+              const img = profile_path
+                ? `https://image.tmdb.org/t/p/w500${profile_path}`
+                : defaultImg;
+              return (
+                <li key={id}>
+                  <img src={img} alt={name} width="75" />
+                  <h3>{name}</h3>
+                  <p>{`Character: ${character}`}</p>
+                </li>
+              );
+            })}
+          </div>
+        ) : (
+          <p>We don't have information about cast of this movie.</p>
+        ))}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { fetchPopularMovies } from 'api/movies';
 
 const Home = () => {
-  const [popularMovies, setPopularMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -24,7 +24,10 @@ const Home = () => {
     <section>
       <h1>Trending today</h1>
       {error && <p>Sorry, something went wrong, try again.</p>}
-      <MoviesList movies={popularMovies} />
+      {popularMovies && <MoviesList movies={popularMovies} />}
+      {popularMovies && popularMovies.length === 0 && (
+        <p>We are sorry. There are no matches to your request.</p>
+      )}
     </section>
   );
 };

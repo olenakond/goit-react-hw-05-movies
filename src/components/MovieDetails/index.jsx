@@ -23,11 +23,10 @@ const MovieDetails = () => {
   }, [movieId]);
 
   return (
-    <section>
+    <div>
       {error && <p>Sorry, something went wrong, try again.</p>}
       {movieInfo && (
         <div>
-          <button type="button">Go back</button>
           <div>
             <img
               src={`https://image.tmdb.org/t/p/w500/${movieInfo.poster_path}`}
@@ -40,20 +39,20 @@ const MovieDetails = () => {
               0,
               4
             )})`}</h1>
-            <p>User score: {`${Math.round(movieInfo.vote_average)} %`}</p>
+            <p>User score: {`${Math.round(movieInfo.popularity)} %`}</p>
             <h2>Overview</h2>
             <p>{movieInfo.overview}</p>
             <h2>Genres</h2>
             <ul>
-              {movieInfo.genres.map(genre => (
-                <li key={genre.id}>{genre.name}</li>
+              {movieInfo.genres.map(({ id, name }) => (
+                <li key={id}>{name}</li>
               ))}
             </ul>
             <p></p>
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 };
 
