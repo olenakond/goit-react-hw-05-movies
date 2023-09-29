@@ -9,21 +9,23 @@ const Home = () => {
   useEffect(() => {
     const getPopularMovies = async () => {
       try {
+        setError('');
         const { results } = await fetchPopularMovies();
         setPopularMovies(results);
       } catch (error) {
         setError(error.message);
+        console.log(error.message);
       }
     };
     getPopularMovies();
   }, []);
 
   return (
-    <main>
+    <section>
       <h1>Trending today</h1>
-      {error && <p>{error}</p>}
+      {error && <p>Sorry, something went wrong, try again.</p>}
       <MoviesList movies={popularMovies} />
-    </main>
+    </section>
   );
 };
 

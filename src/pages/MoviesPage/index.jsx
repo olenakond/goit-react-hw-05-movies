@@ -1,7 +1,11 @@
 import Movies from 'components/Movies';
 
 const MoviesPage = () => {
-  return <Movies />;
+  return (
+    <main>
+      <Movies />
+    </main>
+  );
 };
 
 export default MoviesPage;

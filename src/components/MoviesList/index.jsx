@@ -1,14 +1,14 @@
 import { NavLink } from 'react-router-dom';
 
-const Movies = ({ movies }) => {
+const MoviesList = ({ movies }) => {
   return (
     <div>
       <ul>
         {movies.map(({ title, id }) => {
           return (
-            <NavLink to={`${id}`} key={id}>
-              <p>{title}</p>
-            </NavLink>
+            <li key={id}>
+              <NavLink to={`/movies/${id}`}>{title}</NavLink>
+            </li>
           );
         })}
       </ul>
@@ -16,4 +16,4 @@ const Movies = ({ movies }) => {
   );
 };
 
-export default Movies;
+export default MoviesList;
